@@ -1,20 +1,13 @@
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextComponent } from "@portabletext/react";
 import client from "../apollo-client";
 import { gql } from "@apollo/client";
 import React from "react";
 import Link from "next/link";
-import styles from "../components/Post/Post.module.scss";
+import styles from "components/Post/Post.module.scss";
+import { Post } from "../types";
 
-const Post = ({ post }) => {
-  console.log(post);
-  const {
-    title = "Missing title",
-    author = {
-      name: "Missing name",
-    },
-    categories,
-    bodyRaw = [],
-  } = post;
+const Post = ({ post }: { post: Post }) => {
+  const { title = "Missing title", categories, bodyRaw = [] } = post;
   return (
     <div className={styles["post"]}>
       <div className={styles["post__home-button"]}>
@@ -55,12 +48,11 @@ export async function getStaticPaths() {
       }
     `,
   });
-
   return {
     paths: data.allPost.map((post) => ({
       params: { slug: post.slug.current },
     })),
-    fallback: true,
+    fallback: false,
   };
 }
 
@@ -73,12 +65,6 @@ export async function getStaticProps(context) {
       query ($slug: String) {
         allPost(where: { slug: { current: { eq: $slug } } }) {
           title
-          author {
-            name
-          }
-          categories {
-            title
-          }
           bodyRaw
           mainImage {
             asset {

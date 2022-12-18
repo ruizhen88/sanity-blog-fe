@@ -1,15 +1,17 @@
-type Post = {
+import { PortableTextComponent } from "@portabletext/react";
+
+export type Post = {
   _id: string;
   title: string;
   slug: { current: string };
   publishedAt: string;
   categories: { title: string }[];
-  bodyRaw: unknown;
+  bodyRaw: PortableTextComponent;
   mainImage: { asset: { url: string } };
 };
 
 type Posts = Array<Post>;
 
-type FeedProps = {
+export type FeedProps = {
   posts: Posts;
 };

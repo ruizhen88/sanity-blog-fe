@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "./Feed.module.scss";
 import { toPlainText } from "@portabletext/react";
 import Image from "next/image";
+import { FeedProps } from "../types";
 
 const Feed = ({ posts }: FeedProps) => (
   <div className={styles["feed"]}>

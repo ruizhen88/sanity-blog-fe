@@ -1,5 +1,3 @@
-import Link from "next/link";
-import styles from "./index.module.scss";
 import Page from "../components/Page";
 import Feed from "../components/Feed";
 import { gql } from "@apollo/client";
